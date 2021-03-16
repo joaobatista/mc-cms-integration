@@ -2,7 +2,7 @@ let secureEnv = require('secure-env');
 let throng = require('throng');
 let Queue = require("bull");
 const imageToBase64 = require('image-to-base64');
-global.env = secureEnv({secret:'sfcmsmc'});
+global.env = secureEnv({secret:'mySecretPassword'});
 
 // Get the libraries.
 let https = require('https');
