@@ -76,7 +76,6 @@ function getSalesforceCMSContent(contentType, callback){
     let path= global.env.CMS_DELIVERY_API_BASEPATH + global.env.CHANNEL_ID + global.env.CMS_API_CHANNEL_END_POINT +
     '?managedContentType=' + contentType + '&page=0&pageSize=5';
     let url = global.env.CMS_API_DOMAINPATH + path;
-    console.log(url);
     request.get(url, {
       headers: {
         'Authorization': 'Bearer ' + cms_access_token
@@ -120,7 +119,7 @@ function processCMSContentForMC(job, nodeList, callback, sf_cms_access_token){
           assetType: {
             "id": global.env.MC_ASSET_TYPE_HTML_BLOCK_ID
           },
-          content: Html5Entities.decode(nodeListItem.contentNodes.emailbody.value),
+          content: Html5Entities.decode(nodeListItem.contentNodes.email_body.value),
           "subjectline": {},
           category: {
             id: global.env.MC_ASSET_FOLDER_ID
@@ -170,7 +169,7 @@ function start() {
     getSalesforceCMSContent(global.env.CONTENT_TYPE, function(contentItems,cms_access_token){
       job.progress(20);
       console.log(contentItems);
-      processCMSContentForMC(job, contentItems, done,cms_access_token);
+      processCMSContentForMC(job, contentItems, done, cms_access_token);
     });
   return;
     getSalesforceCMSContent('rte_email', function(contentItems){
